@@ -17,9 +17,12 @@ dd$out <- bracketMeVec(dd$val)
 
 # Use plyr
 library(plyr)
+dd <- createData()
+mutate(dd, out=bracketMeVec(val))
+dd <- createData()
 ddply(dd, "name", transform, out=mean(val))
 ddply(dd, "name", summarise, out=mean(val))
-mutate(dd, bracketMeVec(val))
+ddply(dd, .(), transform, out=bracketMeVec(val))
 
 # Functions
 bracketMe <- function(x) {
