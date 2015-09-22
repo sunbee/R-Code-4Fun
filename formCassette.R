@@ -5,6 +5,10 @@ dataStore <- "CassetteInput.csv"
 theData <- readLines(dataStore)
 
 # Process df 
+# 1. Rows that start with pMON are the one's to grab.
+# 2. Split on commas, this gives a list of vectors size 8
+# 3. Convert list to table, with correct type 
+# 4. Set header
 completeRecords <- grep("^pMON", theData)
 dfset <- do.call(rbind.data.frame, strsplit(theData[completeRecords], ","))
 dfset[] <- lapply(dfset, as.character)
@@ -13,6 +17,14 @@ names(dfset) <- c("Construct", "ElementName", "ElementType",
                   "StartCoordinate", "EndCoordinate", "Strand")
 
 # Long to wide
+# The data in native form are long. That is, several rows per pMON (i.e construct).
+# Convert to wide. Note the diversity of elements within a pMON (i.e construct).
+# Select only the elements of interest. 
+#     Do: grep("ElementDescripton", names(df))
+#     Do: grep("ElementType, names(df))
+# LEFT ON TABLE:
+# 1. There may be multiple elements of the same type in one pMON (i.e. construct)
+# 2. Replace NA with blanks in final output
 df <- reshape(dfset, 
               timevar = "ElementFunction", 
               idvar = c("Construct"),
@@ -30,7 +42,7 @@ names(dfx) <- c("Construct", "Enhancer", "Promoter", "Leader", "Intron",
   
 
 # Write to file
-write.csv(dfx, "CassetteOutput.csv")
+write.csv(dfx, "CassetteOutput.csv", na="")
 
 
 # SANDBOX 
