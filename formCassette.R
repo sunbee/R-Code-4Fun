@@ -25,9 +25,16 @@ dfx <- df[c("Construct",
      "ElementDescription.Gene of Interest",
      "ElementDescription.Targeting Sequence",
      "ElementDescription.Transcription termination sequence")]
+names(dfx) <- c("Construct", "Enhancer", "Promoter", "Leader", "Intron", 
+                "Gene of Interest", "Targeting Sequence", "Termination Sequence")
+  
+
+# Write to file
+write.csv(dfx, "CassetteOutput.csv")
 
 
-# Set cassette
+# SANDBOX 
+# RUN AT YOUR OWN RISK BELOW THIS POINT
 
 # Use Data Frame ?
 df <- as.data.frame(theData, stringsAsFactors = FALSE)
