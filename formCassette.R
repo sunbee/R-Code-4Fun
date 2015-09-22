@@ -39,7 +39,6 @@ dfx <- df[c("Construct",
      "ElementDescription.Transcription termination sequence")]
 names(dfx) <- c("Construct", "Enhancer", "Promoter", "Leader", "Intron", 
                 "Gene of Interest", "Targeting Sequence", "Termination Sequence")
-  
 
 # Write to file
 write.csv(dfx, "CassetteOutput.csv", na="")
@@ -70,7 +69,7 @@ DT[completeRecords, LETTERS[1:8] :=  do.call(rbind.data.frame, strsplit(theData,
 
 # From DT remove noise
 
-# Sandbox
+# String manipulation
 grep("^pMON", theData[4]) 
 Wurdz <- strsplit(theData[4:9], ",")
 Wurdz <- strsplit(theData[4:9], ",")[[1]]
